@@ -32,18 +32,30 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# get input and apply jump
+	# jumping
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = _jump_force
 		
-	# get input and move player
+	# moving
 	var move_input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var move_direction = (transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
-	velocity.x = move_direction.x * _max_speed
-	velocity.z = move_direction.z * _max_speed
+
+	_is_running = Input.is_action_pressed("sprint")
+
+	var target_speed = _max_speed
+
+	if _is_running:
+		target_speed = _max_run_speed
+		var run_dot = -move_direction.dot(transform.basis.z)
+		run_dot = clamp(run_dot, 0.0, 1.0)
+		move_direction *= run_dot
+
+	velocity.x = move_direction.x * target_speed
+	velocity.z = move_direction.z * target_speed
+
 	move_and_slide()
 
-	# rotate camera based on mouse motion in unhandled input
+	# looking
 	rotate_y(-_camera_look_input.x * _look_sensitivity)
 	camera.rotate_x(-_camera_look_input.y * _look_sensitivity)
 	camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
