@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://io53jh1nyvgp"]
+[gd_scene load_steps=5 format=3 uid="uid://io53jh1nyvgp"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_m48m1"]
+[ext_resource type="Script" path="res://interaction_controller.gd" id="2_qmo3u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ibau"]
 radius = 0.3
 height = 1.8
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2b6v"]
+font_size = 20
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_m48m1")
@@ -16,3 +20,23 @@ shape = SubResource("CapsuleShape3D_3ibau")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 current = true
+
+[node name="InteractionController" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -1.5)
+script = ExtResource("2_qmo3u")
+
+[node name="InteractionPrompt" type="Label" parent="Camera3D/InteractionController"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_g2b6v")
+horizontal_alignment = 1
+vertical_alignment = 1

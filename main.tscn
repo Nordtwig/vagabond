@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4vtwuixdeijq"]
+[gd_scene load_steps=11 format=3 uid="uid://b4vtwuixdeijq"]
 
 [ext_resource type="Material" uid="uid://drm3clvqpis42" path="res://Models/TerrainMaterial.tres" id="1_g04fn"]
 [ext_resource type="ArrayMesh" uid="uid://cndcxj6gf0smr" path="res://Models/Terrain.obj" id="2_2alh7"]
 [ext_resource type="PackedScene" uid="uid://cfr7h8g71lsm2" path="res://Models/Tree.tscn" id="3_3wygv"]
 [ext_resource type="PackedScene" uid="uid://dwxdl6tkvd55k" path="res://Models/Rock_0/Rock.tscn" id="4_rwc84"]
 [ext_resource type="PackedScene" uid="uid://io53jh1nyvgp" path="res://player.tscn" id="5_oanwe"]
+[ext_resource type="PackedScene" uid="uid://dut3gyo4e7qbo" path="res://pedestal.tscn" id="6_40mbw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0avs4"]
 
@@ -118,3 +119,6 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_fnea3")
 
 [node name="Player" parent="." instance=ExtResource("5_oanwe")]
+
+[node name="Pedestal" parent="." instance=ExtResource("6_40mbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.29061, 0.00106478, -9.21375)
