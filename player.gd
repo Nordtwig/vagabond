@@ -23,7 +23,6 @@ var _camera_look_input: Vector2
 
 
 func _ready() -> void:
-	print(Input.mouse_mode)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -50,8 +49,17 @@ func _physics_process(delta: float) -> void:
 		run_dot = clamp(run_dot, 0.0, 1.0)
 		move_direction *= run_dot
 
-	velocity.x = move_direction.x * target_speed
-	velocity.z = move_direction.z * target_speed
+	var current_smoothing = _acceleration
+
+	if not is_on_floor():
+		current_smoothing = _air_acceleration
+	elif not move_direction:
+		current_smoothing = _braking
+
+	var target_velocity = move_direction * target_speed
+
+	velocity.x = lerp(velocity.x, target_velocity.x, current_smoothing * delta)
+	velocity.z = lerp(velocity.z, target_velocity.z, current_smoothing * delta)
 
 	move_and_slide()
 
@@ -62,12 +70,15 @@ func _physics_process(delta: float) -> void:
 	_camera_look_input = Vector2.ZERO
 
 
+	# mouse
+	if Input.is_action_just_pressed("toggle_menu"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		_camera_look_input = event.relative
-	if event.is_action_released("toggle_menu"):
-		get_tree().quit()
-		# if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		# 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		# if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-		# 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
