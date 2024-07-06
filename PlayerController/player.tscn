@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://io53jh1nyvgp"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_m48m1"]
-[ext_resource type="Script" path="res://interaction_controller.gd" id="2_qmo3u"]
+[ext_resource type="Script" path="res://PlayerController/player.gd" id="1_m48m1"]
+[ext_resource type="Script" path="res://PlayerController/interaction_controller.gd" id="2_qmo3u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ibau"]
 radius = 0.3

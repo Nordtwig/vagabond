@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cndcxj6gf0smr" path="res://Models/Terrain.obj" id="2_2alh7"]
 [ext_resource type="PackedScene" uid="uid://cfr7h8g71lsm2" path="res://Models/Tree.tscn" id="3_3wygv"]
 [ext_resource type="PackedScene" uid="uid://dwxdl6tkvd55k" path="res://Models/Rock_0/Rock.tscn" id="4_rwc84"]
-[ext_resource type="PackedScene" uid="uid://io53jh1nyvgp" path="res://player.tscn" id="5_oanwe"]
+[ext_resource type="PackedScene" uid="uid://io53jh1nyvgp" path="res://PlayerController/player.tscn" id="5_oanwe"]
 [ext_resource type="PackedScene" uid="uid://dut3gyo4e7qbo" path="res://pedestal.tscn" id="6_40mbw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0avs4"]
